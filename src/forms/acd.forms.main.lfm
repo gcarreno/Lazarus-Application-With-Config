@@ -4,10 +4,38 @@ object frmMain: TfrmMain
   Top = 284
   Width = 805
   Caption = 'Application Config Demo'
+  ClientHeight = 384
+  ClientWidth = 805
   Menu = mnuMain
   OnCreate = FormCreate
-  SessionProperties = 'Top;Left;Height;Width;WindowState;psMain.Position'
-  LCLVersion = '2.1.0.0'
+  OnDestroy = FormDestroy
+  SessionProperties = 'Height;Left;Top;Width;WindowState;pcMain.TabIndex'
+  LCLVersion = '2.0.12.0'
+  object pcMain: TPageControl
+    Left = 0
+    Height = 384
+    Top = 0
+    Width = 805
+    ActivePage = TabSheet3
+    Align = alClient
+    TabIndex = 2
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'TabSheet1'
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'TabSheet2'
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'TabSheet3'
+    end
+    object TabSheet4: TTabSheet
+      Caption = 'TabSheet4'
+    end
+    object TabSheet5: TTabSheet
+      Caption = 'TabSheet5'
+    end
+  end
   object aclMain: TActionList
     Left = 304
     Top = 176
@@ -29,6 +57,7 @@ object frmMain: TfrmMain
   end
   object iniConfigMain: TIniPropStorage
     StoredValues = <>
+    Active = False
     Left = 336
     Top = 232
   end

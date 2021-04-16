@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ActnList, Menus,
-  StdActns, IniPropStorage, ExtCtrls, StdCtrls;
+  StdActns, IniPropStorage, ExtCtrls, StdCtrls, ComCtrls;
 
 type
 
@@ -19,10 +19,18 @@ type
     mnuFileExit: TMenuItem;
     mnuFile: TMenuItem;
     mnuMain: TMainMenu;
+    pcMain: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    TabSheet3: TTabSheet;
+    TabSheet4: TTabSheet;
+    TabSheet5: TTabSheet;
     procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     procedure InitShortCuts;
-    procedure InitConfig;
+    procedure ActivateConfig;
+    procedure DeactivateConfig;
   public
 
   end;
@@ -41,8 +49,17 @@ uses
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  InitConfig;
+  if pcMain.PageCount > 0 then
+  begin
+    pcMain.TabIndex:= 0;
+  end;
+  ActivateConfig;
   InitShortCuts;
+end;
+
+procedure TfrmMain.FormDestroy(Sender: TObject);
+begin
+  DeactivateConfig;
 end;
 
 procedure TfrmMain.InitShortCuts;
@@ -56,7 +73,7 @@ begin
 {$ENDIF}
 end;
 
-procedure TfrmMain.InitConfig;
+procedure TfrmMain.ActivateConfig;
 begin
   // The INI section on the file, kinda spoils it on the name ;)
   iniConfigMain.IniSection:= 'Application';
@@ -74,6 +91,12 @@ begin
 
    This all works seemingly for Windows/Linux/MacOS
   }
+  iniConfigMain.Active:= True;
+end;
+
+procedure TfrmMain.DeactivateConfig;
+begin
+  iniConfigMain.Active:= False;
 end;
 
 end.
