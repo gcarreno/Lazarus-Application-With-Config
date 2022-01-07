@@ -27,5 +27,14 @@ jobs:
       with:
         lazarus-version: ${{ matrix.lazarus-versions }}
 
-    - name: Build the Main App
+    - name: Build the Main App (Windows)
+      if: ${{ matrix.operating-system == 'windows-latest' }}
       run: lazbuild -B --bm=Release "src/application_config_demo.lpi"
+
+    - name: Build the Main App (Ubuntu)
+      if: ${{ matrix.operating-system == 'ubuntu-latest' }}
+      run: lazbuild -B --bm=Release "src/application_config_demo.lpi"
+
+    - name: Build the Main App (macOS)
+      if: ${{ matrix.operating-system == 'macos-latest' }}
+      run: lazbuild -B --bm=Release --ws=cocoa "src/application_config_demo.lpi"
